@@ -6,15 +6,17 @@ public class Graph
 {
     // Contains the child nodes for each vertex of the graph
     private ArrayList<ArrayList<Integer>> childNodes;
+    private Integer size;
 
     public Graph(Integer size)
     {
-        this.childNodes = new ArrayList<ArrayList<Integer>>(size);
-        for (int i = 0; i < size; i++)
-        {
+        this.size = size + 1;
+        this.childNodes = new ArrayList<ArrayList<Integer>>();
+
+        for (int i = 0; i < this.size; i++) {
+
             //Assigning an empty list of adjacent nodes for each vertex
-            var childNode = childNodes.get(i);
-            childNode = new ArrayList<Integer>();
+            childNodes.add(new ArrayList<Integer>());
         }
     }
 
@@ -23,7 +25,7 @@ public class Graph
      * */
     public Integer GetSize()
     {
-        return this.childNodes.size();
+        return size;
     }
 
     /**
@@ -42,5 +44,30 @@ public class Graph
         var hasEdge = childNodes.get(u).contains(v);
         return hasEdge;
     }
+
+    public ArrayList<Integer> GetAdjacent(int v)
+    {
+        return childNodes.get(v);
+    }
+
+    public void TraverseDFS(Integer v)
+    {
+        var visited = new boolean[this.size];
+        DFS(v, visited);
+    }
+
+    private void DFS(Integer v, boolean [] visited)
+    {
+        if (!visited[v])
+        {
+            System.out.print(v + " ");
+            visited[v] = true;
+            for (Integer child : GetAdjacent(v))
+            {
+                DFS(child, visited);
+            }
+        }
+    }
+
 
 }

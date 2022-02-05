@@ -8,6 +8,14 @@ public class Main {
     public static void main(String[] args)
     {
         GraphConstructor graphConstructor = new GraphConstructor();
-        graphConstructor.ConstructGraph();
+        var verticesCount = graphConstructor.GetNumberOfVertices();
+
+        Graph graph = new Graph(verticesCount);
+        graphConstructor.ConstructGraph(graph);
+
+        //Traversing starting from index 0
+        graph.TraverseDFS(1);
+
+
     }
 }
