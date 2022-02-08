@@ -76,4 +76,43 @@ public class Graph
     }
 
 
+    private int CountNodesBFS(int s)
+    {
+        boolean visited[] = new boolean[this.size];
+        int count = 0;
+
+        Queue <Integer> queue = new LinkedList<Integer>();
+
+        visited[s]=true;
+        queue.add(s);
+
+        while (queue.size() != 0)
+        {
+            s = queue.poll();
+            count++;
+
+            Iterator<Integer> i = this.childNodes.get(s).listIterator();
+            while (i.hasNext())
+            {
+                int n = i.next();
+                if (!visited[n])
+                {
+                    visited[n] = true;
+                    queue.add(n);
+                }
+            }
+        }
+
+        return count;
+    }
+
+    /**
+     * Checks if the number of nodes counted is equal to the number of nodes of G,
+     * the graph is connected, otherwise it is disconnected
+     */
+    public boolean CheckIsConnected(int s)
+    {
+        return CountNodesBFS(s) == this.size -1;
+    }
+
 }

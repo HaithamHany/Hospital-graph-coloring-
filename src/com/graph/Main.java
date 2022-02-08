@@ -14,8 +14,10 @@ public class Main {
         graphConstructor.ConstructGraph(graph);
 
         //Traversing starting from index 0
-        graph.TraverseDFS(1);
+        graph.TraverseDFS(5);
 
+        //checking for connection
+        System.out.println("Is node connected? "+graph.CheckIsConnected(1));
 
     }
 }
