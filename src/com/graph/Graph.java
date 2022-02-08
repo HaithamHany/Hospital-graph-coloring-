@@ -36,6 +36,11 @@ public class Graph
         this.childNodes.get(u).add(v);
     }
 
+    public void RemoveEdge(int u, int v)
+    {
+        this.childNodes.get(u).remove(v);
+    }
+
     /**
      * Checks if there is an edge between 2 nodes
      * */
