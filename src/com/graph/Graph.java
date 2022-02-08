@@ -34,6 +34,7 @@ public class Graph
     public void AddEdge(int u, int v)
     {
         this.childNodes.get(u).add(v);
+        this.childNodes.get(v).add(u);
     }
 
     public void RemoveEdge(int u, int v)
