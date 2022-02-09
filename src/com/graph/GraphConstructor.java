@@ -21,59 +21,38 @@ public class GraphConstructor {
     }
     public void ConstructGraph(Graph graph)
     {
-        var nodesMap = ParseGraphFileLines(fileLines);
-
-        for (Map.Entry<Integer, ArrayList<Integer>> pair: nodesMap.entrySet()) {
-
-            var node = pair.getKey();
-            var adjacentNodes = pair.getValue();
-
-            for (var adjNode :  adjacentNodes) {
-                graph.AddEdge(node, adjNode);
-            }
-        }
+        ParseGraphFileLines(fileLines, graph);
     }
 
     /**
      * Converts lines to node and it's adjacent nodes
      * */
-    private HashMap<Integer, ArrayList<Integer>>  ParseGraphFileLines(ArrayList<String> lines)
+    private void  ParseGraphFileLines(ArrayList<String> lines, Graph graph)
     {
-        var nodesMap = new HashMap<Integer,ArrayList<Integer>>();
+        var edgesMap = new HashMap<Integer,Integer>();
 
         //starting from 1 because index 0 is always reserved for number of vertices
         for (int i = 1; i < lines.size(); i++) {
 
-            var node = GetNode(lines.get(i)); //getting the first node
-            var adjacentNodes = ParseLine(lines.get(i));
+            var src = GetNode(lines.get(i)); //getting the first node
+            var destination = ParseLine(lines.get(i));
 
-            nodesMap.put(node, adjacentNodes);
+            graph.AddEdge(src, destination);
+            graph.UpdateEdges(src, destination);
         }
-
-        return nodesMap;
     }
 
     /**
      * Parses a single line of the file and returns list of adjacent node
      * */
-    private ArrayList<Integer> ParseLine(String line)
+    private Integer ParseLine(String line)
     {
-        var adjacentNodes = new ArrayList<Integer>();
+        //first split to separate the line by the first space and adding after space as a node
+        var adjacentNode = line.split(" ");
 
-                //getting adjacent nodes
-        //first split to separate the line by the first space i.e 1 2,3
-        var firstSplit = line.split(" ");
+        var value = Integer.parseInt(adjacentNode[1]);
 
-        //after removing 1 now its 2,3 and these are the adjacent nodes
-        var secondSplit = firstSplit[1].split(",");
-
-        for (var adjacentNode : secondSplit)
-        {
-            var value = Integer.parseInt(adjacentNode);
-            adjacentNodes.add(value);
-        }
-
-        return adjacentNodes;
+        return value;
     }
 
     /**

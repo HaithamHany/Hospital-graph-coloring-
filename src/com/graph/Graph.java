@@ -7,11 +7,13 @@ public class Graph
     // Contains the child nodes for each vertex of the graph
     private ArrayList<ArrayList<Integer>> childNodes;
     private Integer size;
+    private ArrayList<Pair<Integer, Integer>> allEdges;
 
     public Graph(Integer size)
     {
-        this.size = size + 1;
+        this.size = size;
         this.childNodes = new ArrayList<ArrayList<Integer>>();
+        this.allEdges = new ArrayList<Pair<Integer, Integer>>();
 
         for (int i = 0; i < this.size; i++) {
 
@@ -30,6 +32,8 @@ public class Graph
 
     /**
      * Adds edge between 2 nodes
+     * @param u src
+     * @param v destination
      * */
     public void AddEdge(int u, int v)
     {
@@ -37,9 +41,21 @@ public class Graph
         this.childNodes.get(v).add(u);
     }
 
-    public void RemoveEdge(int u, int v)
+    /**
+     * Saves Edges as pairs
+     * @param u src
+     * @param v Destination
+     */
+    public void UpdateEdges(int u, int v)
+    {
+        var edge = new Pair<Integer, Integer>(u, v);
+        allEdges.add(edge);
+    }
+
+    public void RemoveEdge(Integer u, Integer v)
     {
         this.childNodes.get(u).remove(v);
+        this.childNodes.get(v).remove(u);
     }
 
     /**
@@ -112,7 +128,35 @@ public class Graph
      */
     public boolean CheckIsConnected(int s)
     {
-        return CountNodesBFS(s) == this.size -1;
+        return CountNodesBFS(s) == this.size;
     }
+
+    public boolean HasBridges()
+    {
+        var hasBridge = false;
+
+        for (int i = 0; i < allEdges.size(); i++) {
+
+            var sourceVertex = allEdges.get(i).key;
+            var destinationVertex = allEdges.get(i).value;
+
+            //Removing edges from the graph
+            RemoveEdge(sourceVertex, destinationVertex);
+
+            //checking if graph is connected after removing the edge from the first node
+            var isConnected = CheckIsConnected(0);
+
+            //Adding directed edge back
+            AddEdge(sourceVertex, destinationVertex);
+
+            if(!isConnected) {
+                hasBridge = true;
+                break;
+            }
+        }
+
+        return hasBridge;
+    }
+
 
 }
