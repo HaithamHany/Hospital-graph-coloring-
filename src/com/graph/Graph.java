@@ -52,11 +52,27 @@ public class Graph
         allEdges.add(edge);
     }
 
+    /**
+     * Removing Undirected edge
+     * @param u src node
+     * @param v destination node
+     */
     public void RemoveEdge(Integer u, Integer v)
     {
         this.childNodes.get(u).remove(v);
         this.childNodes.get(v).remove(u);
     }
+
+    /**
+     * Removinf Undirected Edge
+     * @param u
+     * @param v
+     */
+    public void RemoveDirectedEdge(Integer u, Integer v)
+    {
+        this.childNodes.get(u).remove(v);
+    }
+
 
     /**
      * Checks if there is an edge between 2 nodes
@@ -70,25 +86,6 @@ public class Graph
     public ArrayList<Integer> GetAdjacent(int v)
     {
         return childNodes.get(v);
-    }
-
-    public void TraverseDFS(Integer v)
-    {
-        var visited = new boolean[this.size];
-        DFS(v, visited);
-    }
-
-    private void DFS(Integer v, boolean [] visited)
-    {
-        if (!visited[v])
-        {
-            System.out.print(v + " ");
-            visited[v] = true;
-            for (Integer child : GetAdjacent(v))
-            {
-                DFS(child, visited);
-            }
-        }
     }
 
 
@@ -156,6 +153,44 @@ public class Graph
         }
 
         return hasBridge;
+    }
+
+    public void OneWayStreetOrientation(Integer s)
+    {
+        //If it's not connected or has any bridges Then the solution is not Feasible
+        if(!CheckIsConnected(s) || HasBridges())
+        {
+            System.out.println("Cannot orient the graph to one way street." +
+                    "The graph provided is either not strongly connected or has a bridge");
+            return;
+        }
+
+        boolean visited[] = new boolean[this.size];
+        int count = 0;
+
+        Queue <Integer> queue = new LinkedList<Integer>();
+
+        visited[s]=true;
+        queue.add(s);
+
+        while (queue.size() != 0)
+        {
+            s = queue.poll();
+            count++;
+
+            Iterator<Integer> i = this.childNodes.get(s).listIterator();
+            while (i.hasNext())
+            {
+                int n = i.next();
+                RemoveDirectedEdge(n, s);
+                if (!visited[n])
+                {
+                    visited[n] = true;
+                    queue.add(n);
+                }
+            }
+        }
+
     }
 
 

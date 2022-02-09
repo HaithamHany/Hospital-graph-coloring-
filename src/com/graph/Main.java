@@ -14,10 +14,6 @@ public class Main {
         graphConstructor.ConstructGraph(graph);
 
         //Traversing starting from index 0
-        graph.TraverseDFS(0);
-         System.out.println();
-        //checking for connection
-        System.out.println("Is connected? "+graph.CheckIsConnected(0));
-        System.out.println("Has bridges? "+graph.HasBridges());
+        graph.OneWayStreetOrientation(0);
     }
 }
