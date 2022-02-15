@@ -11,7 +11,7 @@ public class Graph
 
     public Graph(Integer size)
     {
-        this.size = size;
+        this.size = size + 1;
         this.childNodes = new ArrayList<ArrayList<Integer>>();
         this.allEdges = new ArrayList<Pair<Integer, Integer>>();
 
@@ -125,7 +125,7 @@ public class Graph
      */
     public boolean CheckIsConnected(int s)
     {
-        return CountNodesBFS(s) == this.size;
+        return CountNodesBFS(s) == this.size -1;
     }
 
     public boolean HasBridges()
@@ -193,5 +193,30 @@ public class Graph
 
     }
 
+    //BFS traversing
+    public void Traverse(int start) {
 
+        Queue<Integer> q = new LinkedList<Integer>();       // get a Queue
+        boolean[] mark = new boolean[size];
+        mark[start] = true;                            // put 1st node into Queue
+        q.add(start);
+
+        while (!q.isEmpty()) {
+            int current = q.remove();
+            System.out.print(current+" ");
+            HashSet<Integer> set = new HashSet<Integer>(); /* use a hashset for
+                                    storing nodes of current adj. list*/
+            ArrayList<Integer> adjacentlist = childNodes.get(current);   // get adj. list
+            for (int x : adjacentlist) {
+                if (set.contains(x)) {  // if it already had a edge current-->x
+                         // then we have our parallel edge
+                } else set.add(x);     // if not then we have a new edge
+
+                if (!mark[x]) {      // normal bfs routine
+                    mark[x] = true;
+                    q.add(x);
+                }
+            }
+        }
+    }
 }

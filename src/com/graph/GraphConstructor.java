@@ -49,8 +49,13 @@ public class GraphConstructor {
     {
         //first split to separate the line by the first space and adding after space as a node
         var adjacentNode = line.split(" ");
+        var numbers = "";
 
-        var value = Integer.parseInt(adjacentNode[1]);
+        for (int i = 1; i < adjacentNode.length; i++) {
+
+            numbers+=adjacentNode[i];
+        }
+        var value = Integer.parseInt(numbers);
 
         return value;
     }
@@ -60,8 +65,8 @@ public class GraphConstructor {
      * */
     private int GetNode(String line)
     {
-        var firstChar = line.substring(0,1);
-        return Integer.parseInt(firstChar);
+        var firstChar = line.split(" ");
+        return Integer.parseInt(firstChar[0]);
     }
 
     /**

@@ -14,6 +14,8 @@ public class Main {
         graphConstructor.ConstructGraph(graph);
 
         //Traversing starting from index 0
-        graph.OneWayStreetOrientation(0);
+       // graph.OneWayStreetOrientation(0);
+
+        graph.Traverse(0);
     }
 }
