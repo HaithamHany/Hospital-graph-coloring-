@@ -11,7 +11,7 @@ public class Graph
 
     public Graph(Integer size)
     {
-        this.size = size + 1;
+        this.size = size;
         this.childNodes = new ArrayList<ArrayList<Integer>>();
         this.allEdges = new ArrayList<Pair<Integer, Integer>>();
 
@@ -125,7 +125,7 @@ public class Graph
      */
     public boolean CheckIsConnected(int s)
     {
-        return CountNodesBFS(s) == this.size -1;
+        return CountNodesBFS(s) == this.size;
     }
 
     public boolean HasBridges()
