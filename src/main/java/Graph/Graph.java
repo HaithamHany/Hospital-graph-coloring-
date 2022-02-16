@@ -169,6 +169,7 @@ public class Graph {
         for (int i=0; i<adjList.get(v).size(); i++) {
             Node n = adjList.get(v).get(i);
             RemoveDirectedEdge(n, v);
+
             if (!visited.containsKey(n)) {
                 System.out.println(v.name + " - " + n.name);
                 DFSOneWay(n, visited);
