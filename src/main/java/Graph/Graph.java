@@ -135,6 +135,7 @@ public class Graph {
         return CountNodesBFS(s) == this.getSize();
     }
 
+
     public boolean HasBridges() {
         var hasBridge = false;
 
@@ -161,7 +162,7 @@ public class Graph {
         return hasBridge;
     }
 
-    public void DFS(Node v, ConcurrentHashMap<Node, Boolean> visited)
+    public void DFSOneWay(Node v, ConcurrentHashMap<Node, Boolean> visited)
     {
         visited.put(v, true);
 
@@ -170,21 +171,25 @@ public class Graph {
             RemoveDirectedEdge(n, v);
             if (!visited.containsKey(n)) {
                 System.out.println(v.name + " - " + n.name);
-                DFS(n, visited);
+                DFSOneWay(n, visited);
             }
             else if(visited.size() == getSize() && n.isEntrance) {
                 visited.put(n, false);
                 System.out.println(v.name + " - " + n.name);
-                DFS(n, visited);
+                DFSOneWay(n, visited);
             }
         }
     }
 
+    /**
+     * Function used to orient one way street problem
+     * @param v Staring Node
+     */
     public void DFSOrient(Node v)
     {
         ConcurrentHashMap<Node, Boolean> visited = new ConcurrentHashMap<>();
         visited.put(v, true);
-        DFS(v, visited);
+        DFSOneWay(v, visited);
     }
 
     public void OneWayStreetOrientation(Node s) {
