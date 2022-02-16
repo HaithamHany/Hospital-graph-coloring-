@@ -203,28 +203,22 @@ public class Graph {
         DFSOrient(s);
     }
 
-    //BFS traversing
+    /**
+     * Simple traversing using BFS
+     * @param start the staring node
+     */
     public void Traverse(Node start) {
-
-        Queue<Node> q = new LinkedList<>();       // get a Queue
-        HashSet<Node> mark = new HashSet<>();
-        mark.add(start);  // put 1st node into Queue
+        Queue<Node> q = new LinkedList<>();
+        HashSet<Node> visitedList = new HashSet<>();
+        visitedList.add(start);
         q.add(start);
 
         while (!q.isEmpty()) {
             Node current = q.remove();
-            HashSet<Node> set = new HashSet<>(); /* use a hashset for
-                                    storing nodes of current adj. list*/
-            ArrayList<Node> adjacentlist = adjList.get(current);   // get adj. list
+            ArrayList<Node> adjacentlist = adjList.get(current);
             for (Node x : adjacentlist) {
-                if (set.contains(x)) {  // if it already had a edge current-->x
-                    // then we have our parallel edge
-                } else {
-                    set.add(x);     // if not then we have a new edge
-                }
-
-                if (!mark.contains(x)) {      // normal bfs routine
-                    mark.add(x);
+                if (!visitedList.contains(x)) {
+                    visitedList.add(x);
                     q.add(x);
                     System.out.println(current.name + " - " + x.name);
                 }
