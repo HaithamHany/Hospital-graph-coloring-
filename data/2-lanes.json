@@ -1,0 +1,87 @@
+[
+  {
+    "name": "Entrance",
+    "neighbors": ["3E1", "3E2", "3X", "6X"],
+    "isEntrance": true,
+    "isExit": false
+  },
+  {
+    "name": "3X",
+    "neighbors": ["Entrance","2X"],
+    "isEntrance": false,
+    "isExit": false
+  },
+  {
+    "name": "2X",
+    "neighbors": ["3X","1X"],
+    "isEntrance": false,
+    "isExit": false
+  },
+  {
+    "name": "1X",
+    "neighbors": ["2X","Exit"],
+    "isEntrance": false,
+    "isExit": false
+  },
+  {
+    "name": "Exit",
+    "neighbors": ["1X", "1E1", "1E2", "4X"],
+    "isEntrance": false,
+    "isExit": true
+  },
+  {
+    "name": "3E1",
+    "neighbors": ["Entrance","2E1"],
+    "isEntrance": false,
+    "isExit": false
+  },
+  {
+    "name": "2E1",
+    "neighbors": ["3E1","1E1"],
+    "isEntrance": false,
+    "isExit": false
+  },
+  {
+    "name": "1E1",
+    "neighbors": ["2E1","Exit"],
+    "isEntrance": false,
+    "isExit": false
+  },
+  {
+    "name": "3E2",
+    "neighbors": ["Entrance","2E2"],
+    "isEntrance": false,
+    "isExit": false
+  },
+  {
+    "name": "2E2",
+    "neighbors": ["3E2","1E2"],
+    "isEntrance": false,
+    "isExit": false
+  },
+  {
+    "name": "1E2",
+    "neighbors": ["2E2","Exit"],
+    "isEntrance": false,
+    "isExit": false
+  },
+  {
+    "name": "6X",
+    "neighbors": ["Entrance","5X"],
+    "isEntrance": false,
+    "isExit": false
+  },
+  {
+    "name": "5X",
+    "neighbors": ["6X","4X"],
+    "isEntrance": false,
+    "isExit": false
+  },
+  {
+    "name": "4X",
+    "neighbors": ["5X","Exit"],
+    "isEntrance": false,
+    "isExit": false
+  }
+
+]

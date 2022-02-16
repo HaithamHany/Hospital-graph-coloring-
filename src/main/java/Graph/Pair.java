@@ -1,4 +1,4 @@
-package com.graph;
+package Graph;
 
 /**
  * Used for saving the duplicated key value pairs for saving edges
