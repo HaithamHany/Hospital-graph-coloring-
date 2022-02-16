@@ -3,6 +3,7 @@ package Graph;
 import POJO.Node;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Graph {
     // Contains the child nodes for each vertex of the graph
@@ -160,6 +161,32 @@ public class Graph {
         return hasBridge;
     }
 
+    public void DFS(Node v, ConcurrentHashMap<Node, Boolean> visited)
+    {
+        visited.put(v, true);
+
+        for (int i=0; i<adjList.get(v).size(); i++) {
+            Node n = adjList.get(v).get(i);
+            RemoveDirectedEdge(n, v);
+            if (!visited.containsKey(n)) {
+                System.out.println(v.name + " - " + n.name);
+                DFS(n, visited);
+            }
+            else if(visited.size() == getSize() && n.isEntrance) {
+                visited.put(n, false);
+                System.out.println(v.name + " - " + n.name);
+                DFS(n, visited);
+            }
+        }
+    }
+
+    public void DFSOrient(Node v)
+    {
+        ConcurrentHashMap<Node, Boolean> visited = new ConcurrentHashMap<>();
+        visited.put(v, true);
+        DFS(v, visited);
+    }
+
     public void OneWayStreetOrientation(Node s) {
         //If it's not connected or has any bridges Then the solution is not Feasible
         if (!CheckIsConnected(s)) {
@@ -173,28 +200,7 @@ public class Graph {
             return;
         }
 
-        HashSet<Node> visited = new HashSet<>();
-
-        Queue<Node> queue = new LinkedList<>();
-
-        visited.add(s);
-        queue.add(s);
-
-        while (queue.size() != 0) {
-            s = queue.poll();
-
-            Iterator<Node> i = this.adjList.get(s).listIterator();
-            while (i.hasNext()) {
-                Node n = i.next();
-                RemoveDirectedEdge(n, s);
-                if (!visited.contains(n)) {
-                    visited.add(n);
-                    queue.add(n);
-                    System.out.println(s.name + " - " + n.name);
-                }
-            }
-        }
-
+        DFSOrient(s);
     }
 
     //BFS traversing
