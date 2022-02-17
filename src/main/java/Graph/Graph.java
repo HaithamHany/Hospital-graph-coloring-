@@ -232,11 +232,6 @@ public class Graph {
 
     //endregion
 
-    // region Case 02 one/two-way orientation problem
-
-
-    //endregion
-
     /**
      * Simple traversing using BFS
      * @param start the staring node
