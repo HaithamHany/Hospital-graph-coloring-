@@ -35,6 +35,7 @@ public class Graph {
         this.start = start;
     }
 
+    //region common
     /**
      * Adds edge between 2 nodes
      *
@@ -42,20 +43,29 @@ public class Graph {
      * @param v destination
      */
     public void AddUndirectedEdge(Node u, Node v) {
-        if (!adjList.containsKey(u)) {
+        if (!adjList.containsKey(u))
+        {
             adjList.put(u, new ArrayList<Node>(List.of(v)));
-        } else {
+            UpdateEdges(u,v);
+        }
+        else
+        {
             adjList.get(u).add(v);
         }
-        if (!adjList.containsKey(v)) {
+
+        if (!adjList.containsKey(v))
+        {
             adjList.put(v, new ArrayList<Node>(List.of(u)));
-        } else {
+            UpdateEdges(v,u);
+        }
+        else
+        {
             adjList.get(v).add(u);
         }
     }
 
     /**
-     * Saves Edges as pairs
+     * Saves Edges as pairs of nodes
      *
      * @param u src
      * @param v Destination
@@ -134,7 +144,10 @@ public class Graph {
     public boolean CheckIsConnected(Node s) {
         return CountNodesBFS(s) == this.getSize();
     }
+// endregion
 
+
+    // region One way orientation problem
 
     public boolean HasBridges() {
         var hasBridge = false;
@@ -208,6 +221,8 @@ public class Graph {
 
         DFSOrient(s);
     }
+
+    //endregion
 
     /**
      * Simple traversing using BFS
