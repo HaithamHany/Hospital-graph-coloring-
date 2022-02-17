@@ -1,16 +1,29 @@
 package Graph;
 
-/**
- * Used for saving the duplicated key value pairs for saving edges
- * @param <T> Key
- * @param <U> value
- */
-public class Pair<T, U> {
-    public final T key;
-    public final U value;
+import POJO.Node;
 
-    public Pair(T key, U value) {
-        this.key = key;
-        this.value = value;
+import java.util.Arrays;
+import java.util.Objects;
+
+public class Pair {
+    public final Node nodeA;
+    public final Node nodeB;
+
+    public Pair(Node nodeA, Node nodeB) {
+        this.nodeA = nodeA;
+        this.nodeB = nodeB;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        Pair p = (Pair)obj;
+        return this.nodeA.equals(p.nodeA) && this.nodeB.equals(nodeB);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(nodeA, nodeB);
+        return result;
     }
 }

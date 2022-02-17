@@ -8,18 +8,18 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Graph {
     // Contains the child nodes for each vertex of the graph
     private HashMap<Node, ArrayList<Node>> adjList;
-    private ArrayList<Pair<Node, Node>> allEdges;
+    private ArrayList<Pair> allEdges;
 
     private Node start;
 
     public Graph() {
         this.adjList = new HashMap<>();
-        this.allEdges = new ArrayList<Pair<Node, Node>>();
+        this.allEdges = new ArrayList<Pair>();
     }
 
     public Graph(Node start) {
         this.adjList = new HashMap<>();
-        this.allEdges = new ArrayList<Pair<Node, Node>>();
+        this.allEdges = new ArrayList<Pair>();
         this.start = start;
     }
 
@@ -42,7 +42,8 @@ public class Graph {
      * @param u src
      * @param v destination
      */
-    public void AddUndirectedEdge(Node u, Node v) {
+    public void AddUndirectedEdge(Node u, Node v)
+    {
         if (!adjList.containsKey(u))
         {
             adjList.put(u, new ArrayList<Node>(List.of(v)));
@@ -64,6 +65,20 @@ public class Graph {
         }
     }
 
+    public void AddDirectedEdge(Node u, Node v)
+    {
+        if (!adjList.containsKey(u))
+        {
+            adjList.put(u, new ArrayList<Node>(List.of(v)));
+            UpdateEdges(u,v);
+        }
+        else
+        {
+            adjList.get(u).add(v);
+        }
+    }
+
+
     /**
      * Saves Edges as pairs of nodes
      *
@@ -71,7 +86,7 @@ public class Graph {
      * @param v Destination
      */
     public void UpdateEdges(Node u, Node v) {
-        var edge = new Pair<Node, Node>(u, v);
+        var edge = new Pair(u, v);
         allEdges.add(edge);
     }
 
@@ -146,11 +161,10 @@ public class Graph {
     }
 // endregion
 
-    public void DFS(Node v, DfsConsumer dfs)
+    public void DFS(Node v)
     {
-        ConcurrentHashMap<Node, Boolean> visited = new ConcurrentHashMap<>();
-        visited.put(v, true);
-        dfs.accept(v, visited);
+        HashMap<Pair, Boolean> visited = new HashMap<Pair, Boolean>();
+        DFSOrient(v, visited);
     }
 
     // region Case 01 One way orientation problem
@@ -160,8 +174,8 @@ public class Graph {
 
         for (int i = 0; i < allEdges.size(); i++) {
 
-            var sourceVertex = allEdges.get(i).key;
-            var destinationVertex = allEdges.get(i).value;
+            var sourceVertex = allEdges.get(i).nodeA;
+            var destinationVertex = allEdges.get(i).nodeB;
 
             //Removing edges from the graph
             RemoveEdge(sourceVertex, destinationVertex);
@@ -181,23 +195,22 @@ public class Graph {
         return hasBridge;
     }
 
-    public void DFSOneWay(Node v, ConcurrentHashMap<Node, Boolean> visited)
+    public void DFSOrient(Node v, HashMap<Pair, Boolean> visitedEdges)
     {
-        visited.put(v, true);
-
         for (int i=0; i<adjList.get(v).size(); i++) {
-            Node n = adjList.get(v).get(i);
-            RemoveDirectedEdge(n, v);
 
-            if (!visited.containsKey(n)) {
+            Node n = adjList.get(v).get(i);
+
+            var pair = new Pair(v, n);
+
+            if (!visitedEdges.containsKey(pair)) {
                 System.out.println(v.name + " - " + n.name);
-                DFSOneWay(n, visited);
+                visitedEdges.put(pair, true);
+                RemoveDirectedEdge(n, v);
+
+                DFSOrient(n, visitedEdges);
             }
-            else if(visited.size() == getSize() && n.isEntrance) {
-                visited.put(n, false);
-                System.out.println(v.name + " - " + n.name);
-                DFSOneWay(n, visited);
-            }
+
         }
     }
 
@@ -214,17 +227,12 @@ public class Graph {
             return;
         }
 
-        DFS(s, new DfsConsumer() {
-            @Override
-            public void accept(Node n, ConcurrentHashMap<Node, Boolean> visited) {
-                DFSOneWay(n, visited);
-            }
-        });
+       DFS(getStart());
     }
 
     //endregion
 
-    // region Case 02 one/two way orientation problem
+    // region Case 02 one/two-way orientation problem
 
 
     //endregion
@@ -236,17 +244,21 @@ public class Graph {
     public void Traverse(Node start) {
         Queue<Node> q = new LinkedList<>();
         HashSet<Node> visitedList = new HashSet<>();
+        HashSet<Pair> vistedEdges = new HashSet<Pair>();
         visitedList.add(start);
         q.add(start);
 
         while (!q.isEmpty()) {
             Node current = q.remove();
             ArrayList<Node> adjacentlist = adjList.get(current);
+
             for (Node x : adjacentlist) {
-                if (!visitedList.contains(x)) {
-                    visitedList.add(x);
+                var edge = new Pair(current, x);
+
+                if (!vistedEdges.contains(edge)) {
+                    vistedEdges.add(edge);
+                    System.out.println(edge.nodeA.name + " - "+ edge.nodeB.name);
                     q.add(x);
-                    System.out.println(current.name + " - " + x.name);
                 }
             }
         }

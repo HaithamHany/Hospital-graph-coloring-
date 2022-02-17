@@ -24,7 +24,7 @@ public class FloorMapJSONParser {
                 if(n.isEntrance)
                     graph.setStart(n);
                 for (String neighbor : node.neighbors){
-                    graph.AddUndirectedEdge(n, toNode(nodes, neighbor));
+                    graph.AddDirectedEdge(n, toNode(nodes, neighbor));
                 }
             }
             return graph;
