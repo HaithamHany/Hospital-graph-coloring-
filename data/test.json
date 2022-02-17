@@ -1,0 +1,23 @@
+[
+  {
+    "name": "1",
+    "neighbors": ["2", "3"],
+    "isEntrance": true,
+    "isExit": false,
+    "hasDoubleEdge": true
+  },
+  {
+    "name": "2",
+    "neighbors": ["3","1"],
+    "isEntrance": false,
+    "isExit": false,
+    "hasDoubleEdge": false
+  },
+  {
+    "name": "3",
+    "neighbors": ["2","1"],
+    "isEntrance": false,
+    "isExit": false,
+    "hasDoubleEdge": true
+  }
+]

@@ -20,7 +20,7 @@ public class FloorMapJSONParser {
 
             Graph graph = new Graph();
             for (Node node : nodes) {
-                Node n = new Node(node.name, node.isEntrance, node.isExit);
+                Node n = new Node(node.name, node.isEntrance, node.isExit, node.hasDoubleEdge);
                 if(n.isEntrance)
                     graph.setStart(n);
                 for (String neighbor : node.neighbors){
@@ -38,7 +38,7 @@ public class FloorMapJSONParser {
     public static Node toNode(ArrayList<Node> nodes, String name) throws Exception {
         for (Node n: nodes) {
             if(n.name.equals(name))
-                return new Node(name, n.isEntrance, n.isExit);
+                return new Node(name, n.isEntrance, n.isExit, n.hasDoubleEdge);
         }
         throw new Exception("Node " + name + " Not Found");
     }
