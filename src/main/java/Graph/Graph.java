@@ -146,8 +146,14 @@ public class Graph {
     }
 // endregion
 
+    public void DFS(Node v, DfsConsumer dfs)
+    {
+        ConcurrentHashMap<Node, Boolean> visited = new ConcurrentHashMap<>();
+        visited.put(v, true);
+        dfs.accept(v, visited);
+    }
 
-    // region One way orientation problem
+    // region Case 01 One way orientation problem
 
     public boolean HasBridges() {
         var hasBridge = false;
@@ -195,17 +201,6 @@ public class Graph {
         }
     }
 
-    /**
-     * Function used to orient one way street problem
-     * @param v Staring Node
-     */
-    public void DFSOrient(Node v)
-    {
-        ConcurrentHashMap<Node, Boolean> visited = new ConcurrentHashMap<>();
-        visited.put(v, true);
-        DFSOneWay(v, visited);
-    }
-
     public void OneWayStreetOrientation(Node s) {
         //If it's not connected or has any bridges Then the solution is not Feasible
         if (!CheckIsConnected(s)) {
@@ -219,8 +214,18 @@ public class Graph {
             return;
         }
 
-        DFSOrient(s);
+        DFS(s, new DfsConsumer() {
+            @Override
+            public void accept(Node n, ConcurrentHashMap<Node, Boolean> visited) {
+                DFSOneWay(n, visited);
+            }
+        });
     }
+
+    //endregion
+
+    // region Case 02 one/two way orientation problem
+
 
     //endregion
 
