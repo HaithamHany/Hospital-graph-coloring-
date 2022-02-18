@@ -3,6 +3,7 @@ package POJO;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import Graph.Graph;
+import Graph.Lane;
 
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -25,9 +26,9 @@ public class FloorMapJSONParser {
                 if(n.isEntrance)
                     graph.setStart(n);
                 for (String neighbor : node.neighbors){
-                    graph.AddDirectedEdge(n, toNode(nodes, neighbor));
+                    graph.AddDirectedEdge(n, toNode(nodes, neighbor), Lane.LANE01);
                     if(floorMap.isAll2Lanes) {
-                        graph.AddDirectedEdge(n, toNode(nodes, neighbor));
+                        graph.AddDirectedEdge(n, toNode(nodes, neighbor), Lane.LANE02);
                     }
                 }
             }

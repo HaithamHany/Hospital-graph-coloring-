@@ -8,17 +8,25 @@ public class Edge {
     public final Node nodeA;
     public final Node nodeB;
     public Color color;
+    public Lane lane;
+
 
     public Edge(Node nodeA, Node nodeB) {
         this.nodeA = nodeA;
         this.nodeB = nodeB;
         this.color = Color.NONE;
+        this.lane = Lane.LANE01;
     }
 
     public Edge(Node nodeA, Node nodeB, Color color) {
-        this.nodeA = nodeA;
-        this.nodeB = nodeB;
+        this(nodeA, nodeB);
         this.color = color;
+        this.lane = Lane.LANE01;
+    }
+
+    public Edge(Node nodeA, Node nodeB, Lane lane) {
+        this(nodeA, nodeB);
+        this.lane = lane;
     }
 
     public void setColor(Color color) {
@@ -33,12 +41,16 @@ public class Edge {
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(nodeA, nodeB);
+        int result = Objects.hash(nodeA, nodeB, color, lane);
         return result;
     }
 
     @Override
     public String toString() {
         return nodeA.name + " - " + nodeB.name + " : " + (color.equals(Color.NONE)? "" : color);
+    }
+
+    public boolean isColored() {
+        return !color.equals(Color.NONE);
     }
 }

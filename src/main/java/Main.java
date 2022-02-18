@@ -6,9 +6,10 @@ public class Main {
 
     public static void main(String[] args)
     {
-        Graph graph = FloorMapJSONParser.parseJSON("figA-2lanes.json");
-        ColoredGraph coloredGraph = new ColoredGraph(graph);
+        Graph graph = FloorMapJSONParser.parseJSON("case3_figB.json");
+//        graph.OneWayStreetOrientation(graph.getStart());
 
+        ColoredGraph coloredGraph = new ColoredGraph(graph);
         coloredGraph.ColorAndOrientGraph(graph.getStart());
     }
 }

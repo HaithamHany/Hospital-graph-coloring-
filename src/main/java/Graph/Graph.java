@@ -65,16 +65,17 @@ public class Graph {
         }
     }
 
-    public void AddDirectedEdge(Node u, Node v)
+    public void AddDirectedEdge(Node u, Node v, Lane lane)
     {
         if (!adjList.containsKey(u))
         {
             adjList.put(u, new ArrayList<Node>(List.of(v)));
-            UpdateEdges(u,v);
+            UpdateEdges(u, v, lane);
         }
         else
         {
             adjList.get(u).add(v);
+            UpdateEdges(u, v, lane);
         }
     }
 
@@ -87,6 +88,17 @@ public class Graph {
      */
     public void UpdateEdges(Node u, Node v) {
         var edge = new Edge(u, v);
+        allEdges.add(edge);
+    }
+
+    /**
+     * Saves Edges as pairs of nodes
+     *
+     * @param u src
+     * @param v Destination
+     */
+    public void UpdateEdges(Node u, Node v, Lane lane) {
+        var edge = new Edge(u, v, lane);
         allEdges.add(edge);
     }
 
@@ -160,12 +172,6 @@ public class Graph {
     }
 // endregion
 
-    public void DFS(Node v)
-    {
-        HashMap<Edge, Boolean> visited = new HashMap<Edge, Boolean>();
-        DFSOrient(v, visited);
-    }
-
     // region Case 01 One way orientation problem
 
     public boolean HasBridges() {
@@ -194,24 +200,6 @@ public class Graph {
         return hasBridge;
     }
 
-    public void DFSOrient(Node v, HashMap<Edge, Boolean> visitedEdges)
-    {
-        for (int i=0; i<adjList.get(v).size(); i++) {
-
-            Node n = adjList.get(v).get(i);
-
-            var pair = new Edge(v, n);
-
-            if (!visitedEdges.containsKey(pair)) {
-                System.out.println(v.name + " - " + n.name);
-                visitedEdges.put(pair, true);
-                RemoveDirectedEdge(n, v);
-
-                DFSOrient(n, visitedEdges);
-            }
-
-        }
-    }
 
     public void OneWayStreetOrientation(Node s) {
         //If it's not connected or has any bridges Then the solution is not Feasible
@@ -226,7 +214,7 @@ public class Graph {
             return;
         }
 
-       DFS(getStart());
+       Utils.DFS(this, getStart());
     }
 
     //endregion

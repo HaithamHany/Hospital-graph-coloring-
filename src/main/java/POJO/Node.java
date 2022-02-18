@@ -45,7 +45,7 @@ public class Node {
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(name, isEntrance, isExit, hasDoubleEdge);
+        int result = Objects.hash(name, isEntrance, isExit);
         result = 31 * result + Arrays.hashCode(neighbors);
         return result;
     }
