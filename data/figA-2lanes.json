@@ -1,0 +1,68 @@
+{
+  "isAll2Lanes": true,
+  "nodes": [
+    {
+      "name": "EN/EX",
+      "neighbors": ["1", "8"],
+      "isEntrance": true,
+      "isExit": true,
+      "hasCovid": false
+    },
+    {
+      "name": "1",
+      "neighbors": ["EN/EX","2"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    },
+    {
+      "name": "2",
+      "neighbors": ["1","3"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    },
+    {
+      "name": "3",
+      "neighbors": ["2","4"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    },
+    {
+      "name": "4",
+      "neighbors": ["3", "5"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": true
+    },
+    {
+      "name": "5",
+      "neighbors": ["4","6"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": true
+    },
+    {
+      "name": "6",
+      "neighbors": ["5","7"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": true
+    },
+    {
+      "name": "7",
+      "neighbors": ["6","8"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    },
+    {
+      "name": "8",
+      "neighbors": ["7","EN/EX"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    }
+  ]
+}

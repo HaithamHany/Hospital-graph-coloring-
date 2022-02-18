@@ -3,23 +3,23 @@ package Graph;
 import POJO.Node;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Predicate;
 
 public class Graph {
     // Contains the child nodes for each vertex of the graph
-    private HashMap<Node, ArrayList<Node>> adjList;
-    private ArrayList<Pair> allEdges;
+    protected HashMap<Node, ArrayList<Node>> adjList;
+    protected ArrayList<Edge> allEdges;
 
     private Node start;
 
     public Graph() {
         this.adjList = new HashMap<>();
-        this.allEdges = new ArrayList<Pair>();
+        this.allEdges = new ArrayList<Edge>();
     }
 
     public Graph(Node start) {
         this.adjList = new HashMap<>();
-        this.allEdges = new ArrayList<Pair>();
+        this.allEdges = new ArrayList<Edge>();
         this.start = start;
     }
 
@@ -86,7 +86,7 @@ public class Graph {
      * @param v Destination
      */
     public void UpdateEdges(Node u, Node v) {
-        var edge = new Pair(u, v);
+        var edge = new Edge(u, v);
         allEdges.add(edge);
     }
 
@@ -162,7 +162,7 @@ public class Graph {
 
     public void DFS(Node v)
     {
-        HashMap<Pair, Boolean> visited = new HashMap<Pair, Boolean>();
+        HashMap<Edge, Boolean> visited = new HashMap<Edge, Boolean>();
         DFSOrient(v, visited);
     }
 
@@ -194,13 +194,13 @@ public class Graph {
         return hasBridge;
     }
 
-    public void DFSOrient(Node v, HashMap<Pair, Boolean> visitedEdges)
+    public void DFSOrient(Node v, HashMap<Edge, Boolean> visitedEdges)
     {
         for (int i=0; i<adjList.get(v).size(); i++) {
 
             Node n = adjList.get(v).get(i);
 
-            var pair = new Pair(v, n);
+            var pair = new Edge(v, n);
 
             if (!visitedEdges.containsKey(pair)) {
                 System.out.println(v.name + " - " + n.name);
@@ -238,7 +238,7 @@ public class Graph {
     public void Traverse(Node start) {
         Queue<Node> q = new LinkedList<>();
         HashSet<Node> visitedList = new HashSet<>();
-        HashSet<Pair> vistedEdges = new HashSet<Pair>();
+        HashSet<Edge> vistedEdges = new HashSet<Edge>();
         visitedList.add(start);
         q.add(start);
 
@@ -247,7 +247,7 @@ public class Graph {
             ArrayList<Node> adjacentlist = adjList.get(current);
 
             for (Node x : adjacentlist) {
-                var edge = new Pair(current, x);
+                var edge = new Edge(current, x);
 
                 if (!vistedEdges.contains(edge)) {
                     vistedEdges.add(edge);

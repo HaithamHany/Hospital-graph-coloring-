@@ -16,7 +16,8 @@ public class FloorMapJSONParser {
         Gson g = new Gson();
         try{
             JsonReader reader = new JsonReader(new FileReader(JSON_DIR + filename));
-            ArrayList<Node> nodes = new ArrayList<>(Arrays.asList(g.fromJson(reader, Node[].class)));
+            FloorMap floorMap = g.fromJson(reader, FloorMap.class);
+            ArrayList<Node> nodes = new ArrayList<>(Arrays.asList(floorMap.nodes));
 
             Graph graph = new Graph();
             for (Node node : nodes) {
@@ -25,6 +26,9 @@ public class FloorMapJSONParser {
                     graph.setStart(n);
                 for (String neighbor : node.neighbors){
                     graph.AddDirectedEdge(n, toNode(nodes, neighbor));
+                    if(floorMap.isAll2Lanes) {
+                        graph.AddDirectedEdge(n, toNode(nodes, neighbor));
+                    }
                 }
             }
             return graph;
