@@ -3,7 +3,6 @@ package Graph;
 import POJO.Node;
 
 import java.util.*;
-import java.util.function.Predicate;
 
 public class Graph {
     // Contains the child nodes for each vertex of the graph
@@ -35,7 +34,6 @@ public class Graph {
         this.start = start;
     }
 
-    //region common
     /**
      * Adds edge between 2 nodes
      *
@@ -170,9 +168,6 @@ public class Graph {
     public boolean CheckIsConnected(Node s) {
         return CountNodesBFS(s) == this.getSize();
     }
-// endregion
-
-    // region Case 01 One way orientation problem
 
     public boolean HasBridges() {
         var hasBridge = false;
@@ -217,7 +212,6 @@ public class Graph {
        Utils.DFS(this, getStart());
     }
 
-    //endregion
 
     /**
      * Simple traversing using BFS
