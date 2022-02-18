@@ -1,0 +1,72 @@
+{
+  "isAll2Lanes": false,
+  "nodes": [
+    {
+      "name": "Entrance",
+      "neighbors": ["3E","3E", "3X", "6X"],
+      "isEntrance": true,
+      "isExit": false
+    },
+    {
+      "name": "3X",
+      "neighbors": ["Entrance","2X"],
+      "isEntrance": false,
+      "isExit": false
+    },
+    {
+      "name": "2X",
+      "neighbors": ["3X","1X"],
+      "isEntrance": false,
+      "isExit": false
+    },
+    {
+      "name": "1X",
+      "neighbors": ["2X","Exit"],
+      "isEntrance": false,
+      "isExit": false
+    },
+    {
+      "name": "Exit",
+      "neighbors": ["1X", "1E","1E", "4X"],
+      "isEntrance": false,
+      "isExit": true
+    },
+    {
+      "name": "3E",
+      "neighbors": ["Entrance", "Entrance","2E", "2E"],
+      "isEntrance": false,
+      "isExit": false
+    },
+    {
+      "name": "2E",
+      "neighbors": ["3E", "3E","1E", "1E"],
+      "isEntrance": false,
+      "isExit": false
+    },
+    {
+      "name": "1E",
+      "neighbors": ["2E", "2E","Exit", "Exit"],
+      "isEntrance": false,
+      "isExit": false
+    },
+    {
+      "name": "6X",
+      "neighbors": ["Entrance","5X", "5X"],
+      "isEntrance": false,
+      "isExit": false
+    },
+    {
+      "name": "5X",
+      "neighbors": ["6X","6X","4X"],
+      "isEntrance": false,
+      "isExit": false
+    },
+    {
+      "name": "4X",
+      "neighbors": ["5X","Exit"],
+      "isEntrance": false,
+      "isExit": false
+    }
+
+  ]
+}

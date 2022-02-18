@@ -1,0 +1,194 @@
+{
+  "isAll2Lanes": false,
+  "nodes": [
+    {
+      "name": "EN",
+      "neighbors": ["1", "13"],
+      "isEntrance": true,
+      "isExit": false,
+      "hasCovid": false
+    },
+    {
+      "name": "EX",
+      "neighbors": ["13","11","15"],
+      "isEntrance": false,
+      "isExit": true,
+      "hasCovid": false
+    },
+    {
+      "name": "1",
+      "neighbors": ["2","EN"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    },
+    {
+      "name": "2",
+      "neighbors": ["3","1"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    },
+    {
+      "name": "3",
+      "neighbors": ["4", "8", "2"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    },
+    {
+      "name": "4",
+      "neighbors": ["9","5","7","3"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    },
+    {
+      "name": "5",
+      "neighbors": ["4","6"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": true
+    },
+    {
+      "name": "6",
+      "neighbors": ["5","7"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": true
+    },
+    {
+      "name": "7",
+      "neighbors": ["6","4","8"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": true
+    },
+    {
+      "name": "8",
+      "neighbors": ["7","3"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": true
+    },
+    {
+      "name": "9",
+      "neighbors": ["10","11"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    },
+    {
+      "name": "10",
+      "neighbors": ["10","9"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    },
+    {
+      "name": "11",
+      "neighbors": ["25","9","10","12"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    },
+    {
+      "name": "13",
+      "neighbors": ["EN","12","19"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    },
+    {
+      "name": "15",
+      "neighbors": ["13","25","16",19],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    },
+    {
+      "name": "16",
+      "neighbors": ["15","17","20"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    },
+    {
+      "name": "17",
+      "neighbors": ["16","18","19"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": true
+    },
+    {
+      "name": "18",
+      "neighbors": ["17","19","20"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": true
+    },
+    {
+      "name": "19",
+      "neighbors": ["15","13","17"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": true
+    },
+    {
+      "name": "20",
+      "neighbors": ["18","16","21"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    },
+    {
+      "name": "21",
+      "neighbors": ["20","22","24","27"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    },
+    {
+      "name": "22",
+      "neighbors": ["21","23"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    },
+    {
+      "name": "23",
+      "neighbors": ["22","24"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    },
+    {
+      "name": "24",
+      "neighbors": ["23","21"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    },
+    {
+      "name": "25",
+      "neighbors": ["15","11","26"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    },
+    {
+      "name": "26",
+      "neighbors": ["25","27"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    },
+    {
+      "name": "27",
+      "neighbors": ["26","21"],
+      "isEntrance": false,
+      "isExit": false,
+      "hasCovid": false
+    }
+  ]
+}
